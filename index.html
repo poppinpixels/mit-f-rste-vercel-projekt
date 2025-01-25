@@ -28,6 +28,7 @@
             </ul>
         </nav>
     </header>
+        <div class="weather-widget"></div>
     <main>
         <!-- "Om mig" section -->
         <section id="om">
@@ -269,6 +270,32 @@ form.addEventListener('submit', () => {
         localStorage.removeItem(`form_${field}`);
     });
 });
+
+// Weather Widget
+async function getWeather() {
+    const city = 'Copenhagen';
+    const apiKey = '79053c59004c0d0e55c8eba5c92841fa'; // Get from OpenWeather
+    
+    try {
+        const response = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
+        );
+        
+        if (!response.ok) throw new Error('Vejr data ikke tilgængelig');
+        
+        const data = await response.json();
+        
+        document.querySelector('.weather-widget').innerHTML = `
+            <div class="weather-info">
+                <h4>${city}</h4>
+                <p>${Math.round(data.main.temp)}°C</p>
+                <p>${data.weather[0].description}</p>
+            </div>
+        `;
+    } catch (error) {
+        console.error('Vejr fejl:', error);
+    }
+}
 </script>
 </body>
 </html>
