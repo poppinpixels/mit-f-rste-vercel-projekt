@@ -158,9 +158,10 @@
        progressBar.style.width = scrolled + '%';
    });
    
-   // Projekt kort loading
-document.querySelectorAll('.projekt-kort').forEach(card => {
-    const originalContent = card.innerHTML;
+   document.querySelectorAll('.projekt-kort').forEach(card => {
+    const title = card.querySelector('h3').textContent;
+    const description = card.querySelector('p').textContent;
+    
     card.innerHTML = `
         <div class="skeleton">
             <div class="skeleton-title"></div>
@@ -170,7 +171,10 @@ document.querySelectorAll('.projekt-kort').forEach(card => {
     `;
     
     setTimeout(() => {
-        card.innerHTML = originalContent;
+        card.innerHTML = `
+            <h3>${title}</h3>
+            <p>${description}</p>
+        `;
         card.classList.add('loaded');
     }, 1500);
 });
