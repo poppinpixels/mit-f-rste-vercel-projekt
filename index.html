@@ -53,43 +53,86 @@
         </section>
     </main>
     <script>
-        // Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
+const formValidation = {
+    name: {
+        pattern: /^[a-zA-ZæøåÆØÅ\s]{2,50}$/,
+        message: 'Navn skal være mellem 2 og 50 bogstaver'
+    },
+    email: {
+        pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        message: 'Indtast en gyldig email'
+    },
+    message: {
+        minLength: 10,
+        message: 'Beskeden skal være mindst 10 tegn'
+    }
+};
 
-// Form validation
-const form = document.querySelector('.kontakt-form');
-const inputs = form.querySelectorAll('input, textarea');
-
-inputs.forEach(input => {
-    input.addEventListener('input', function() {
-        if (this.validity.valid) {
-            this.style.borderColor = '#4CAF50';
-        } else {
-            this.style.borderColor = '#f44336';
-        }
-    });
-});
-
-// Form submit with loading state
-form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const button = this.querySelector('button');
-    button.disabled = true;
-    button.innerHTML = '<span class="loading"></span> Sender...';
+function validateInput(input, rules) {
+    const value = input.value.trim();
+    const errorDiv = input.nextElementSibling || createErrorDiv(input);
     
-    setTimeout(() => {
-        button.disabled = false;
-        button.innerHTML = 'Send';
-        alert('Besked sendt!');
-        this.reset();
-    }, 2000);
+    if (rules.pattern && !rules.pattern.test(value)) {
+        showError(input, errorDiv, rules.message);
+        return false;
+    }
+    
+    if (rules.minLength && value.length < rules.minLength) {
+        showError(input, errorDiv, rules.message);
+        return false;
+    }
+    
+    hideError(input, errorDiv);
+    return true;
+}
+
+function showError(input, errorDiv, message) {
+    input.classList.add('error');
+    errorDiv.textContent = message;
+    errorDiv.style.display = 'block';
+}
+
+function hideError(input, errorDiv) {
+    input.classList.remove('error');
+    errorDiv.style.display = 'none';
+}
+
+function createErrorDiv(input) {
+    const div = document.createElement('div');
+    div.className = 'error-message';
+    input.parentNode.insertBefore(div, input.nextSibling);
+    return div;
+}
+
+document.querySelector('.kontakt-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    let isValid = true;
+    
+    // Valider navn
+    const nameInput = this.querySelector('input[type="text"]');
+    isValid = validateInput(nameInput, formValidation.name) && isValid;
+    
+    // Valider email
+    const emailInput = this.querySelector('input[type="email"]');
+    isValid = validateInput(emailInput, formValidation.email) && isValid;
+    
+    // Valider besked
+    const messageInput = this.querySelector('textarea');
+    isValid = validateInput(messageInput, formValidation.message) && isValid;
+    
+    if (isValid) {
+        const button = this.querySelector('button');
+        button.disabled = true;
+        button.innerHTML = '<span class="loading"></span> Sender...';
+        
+        setTimeout(() => {
+            button.disabled = false;
+            button.innerHTML = 'Send';
+            alert('Besked sendt!');
+            this.reset();
+        }, 2000);
+    }
 });
         </script>
 </body>

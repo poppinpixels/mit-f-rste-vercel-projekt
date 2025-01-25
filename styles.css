@@ -149,3 +149,14 @@ main {
         transform: translateY(0);
     }
 }
+
+.error {
+    border-color: #f44336 !important;
+}
+
+.error-message {
+    color: #f44336;
+    font-size: 0.8em;
+    margin-top: 4px;
+    display: none;
+}
