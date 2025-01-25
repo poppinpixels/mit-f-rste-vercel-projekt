@@ -1,12 +1,16 @@
-<!DOCTYPE html>
-<html lang="da">
+```html
+<!DOCTYPE html> <!-- HTML5 doctype -->
+<html lang="da"> <!-- Sets page language to Danish -->
 <head>
+    <!-- Basic meta settings, responsive viewport, title, and font/link references -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mit Website</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Aptos:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Simple favicon using an inline SVG -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
+    <!-- SEO metadata and Open Graph tags -->
     <meta name="description" content="Walsted om AI og uddannelse">
     <meta property="og:title" content="Dit website navn">
     <meta property="og:description" content="AI og uddannelse">
@@ -15,6 +19,7 @@
 </head>
 <body>
     <header>
+        <!-- Main heading with a simple nav menu -->
         <h1 class="animated-title">Velkommen</h1>
         <nav>
             <ul>
@@ -25,10 +30,12 @@
         </nav>
     </header>
     <main>
+        <!-- "Om mig" section -->
         <section id="om">
             <h2>Om mig</h2>
             <p>Her kommer din beskrivelse</p>
         </section>
+        <!-- "Projekter" section with two example project cards -->
         <section id="projekter">
             <h2>Projekter</h2>
             <div class="projekt-grid">
@@ -42,6 +49,7 @@
                 </article>
             </div>
         </section>
+        <!-- "Kontakt" section with a form for user input -->
         <section id="kontakt">
             <h2>Kontakt</h2>
             <form class="kontakt-form">
@@ -52,88 +60,94 @@
             </form>
         </section>
     </main>
+
     <script>
-const formValidation = {
-    name: {
-        pattern: /^[a-zA-ZæøåÆØÅ\s]{2,50}$/,
-        message: 'Navn skal være mellem 2 og 50 bogstaver'
-    },
-    email: {
-        pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-        message: 'Indtast en gyldig email'
-    },
-    message: {
-        minLength: 10,
-        message: 'Beskeden skal være mindst 10 tegn'
-    }
-};
+        // Validation rules stored in an object
+        const formValidation = {
+            name: {
+                pattern: /^[a-zA-ZæøåÆØÅ\s]{2,50}$/,
+                message: 'Navn skal være mellem 2 og 50 bogstaver'
+            },
+            email: {
+                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: 'Indtast en gyldig email'
+            },
+            message: {
+                minLength: 10,
+                message: 'Beskeden skal være mindst 10 tegn'
+            }
+        };
 
-function validateInput(input, rules) {
-    const value = input.value.trim();
-    const errorDiv = input.nextElementSibling || createErrorDiv(input);
-    
-    if (rules.pattern && !rules.pattern.test(value)) {
-        showError(input, errorDiv, rules.message);
-        return false;
-    }
-    
-    if (rules.minLength && value.length < rules.minLength) {
-        showError(input, errorDiv, rules.message);
-        return false;
-    }
-    
-    hideError(input, errorDiv);
-    return true;
-}
+        // Generic input validation function
+        function validateInput(input, rules) {
+            const value = input.value.trim();
+            const errorDiv = input.nextElementSibling || createErrorDiv(input);
 
-function showError(input, errorDiv, message) {
-    input.classList.add('error');
-    errorDiv.textContent = message;
-    errorDiv.style.display = 'block';
-}
+            if (rules.pattern && !rules.pattern.test(value)) {
+                showError(input, errorDiv, rules.message);
+                return false;
+            }
+            if (rules.minLength && value.length < rules.minLength) {
+                showError(input, errorDiv, rules.message);
+                return false;
+            }
+            hideError(input, errorDiv);
+            return true;
+        }
 
-function hideError(input, errorDiv) {
-    input.classList.remove('error');
-    errorDiv.style.display = 'none';
-}
+        // Displays error message
+        function showError(input, errorDiv, message) {
+            input.classList.add('error');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
 
-function createErrorDiv(input) {
-    const div = document.createElement('div');
-    div.className = 'error-message';
-    input.parentNode.insertBefore(div, input.nextSibling);
-    return div;
-}
+        // Hides error message
+        function hideError(input, errorDiv) {
+            input.classList.remove('error');
+            errorDiv.style.display = 'none';
+        }
 
-document.querySelector('.kontakt-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    let isValid = true;
-    
-    // Valider navn
-    const nameInput = this.querySelector('input[type="text"]');
-    isValid = validateInput(nameInput, formValidation.name) && isValid;
-    
-    // Valider email
-    const emailInput = this.querySelector('input[type="email"]');
-    isValid = validateInput(emailInput, formValidation.email) && isValid;
-    
-    // Valider besked
-    const messageInput = this.querySelector('textarea');
-    isValid = validateInput(messageInput, formValidation.message) && isValid;
-    
-    if (isValid) {
-        const button = this.querySelector('button');
-        button.disabled = true;
-        button.innerHTML = '<span class="loading"></span> Sender...';
-        
-        setTimeout(() => {
-            button.disabled = false;
-            button.innerHTML = 'Send';
-            alert('Besked sendt!');
-            this.reset();
-        }, 2000);
-    }
-});
-        </script>
+        // Creates an error message div if it doesn't exist
+        function createErrorDiv(input) {
+            const div = document.createElement('div');
+            div.className = 'error-message';
+            input.parentNode.insertBefore(div, input.nextSibling);
+            return div;
+        }
+
+        // Form submit handler with validation
+        document.querySelector('.kontakt-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let isValid = true;
+
+            // Validate name
+            const nameInput = this.querySelector('input[type="text"]');
+            isValid = validateInput(nameInput, formValidation.name) && isValid;
+
+            // Validate email
+            const emailInput = this.querySelector('input[type="email"]');
+            isValid = validateInput(emailInput, formValidation.email) && isValid;
+
+            // Validate message
+            const messageInput = this.querySelector('textarea');
+            isValid = validateInput(messageInput, formValidation.message) && isValid;
+
+            // If all fields are valid, simulate sending
+            if (isValid) {
+                const button = this.querySelector('button');
+                button.disabled = true;
+                button.innerHTML = '<span class="loading"></span> Sender...';
+
+                setTimeout(() => {
+                    button.disabled = false;
+                    button.innerHTML = 'Send';
+                    alert('Besked sendt!');
+                    this.reset();
+                }, 2000);
+            }
+        });
+    </script>
 </body>
 </html>
+```
