@@ -52,5 +52,16 @@
             </form>
         </section>
     </main>
+    document.querySelector('.kontakt-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        this.classList.add('sending');
+        
+        // Simuler afsendelse
+        setTimeout(() => {
+            this.classList.remove('sending');
+            alert('Besked sendt!');
+            this.reset();
+        }, 2000);
+    });
 </body>
 </html>
