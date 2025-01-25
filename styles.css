@@ -91,3 +91,28 @@ nav a {
 .kontakt-form button:hover {
     background: #444;
 }
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .projekt-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+    
+    .kontakt-form {
+        padding: 0 0.5rem;
+    }
+}
+
+section {
+    padding: 3rem 1rem;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+}
