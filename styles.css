@@ -44,3 +44,19 @@ nav a {
     border: 1px solid #ddd;
     border-radius: 8px;
 }
+
+.projekt-kort {
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.projekt-kort:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.projekt-kort h3 {
+    margin-bottom: 0.5rem;
+}
