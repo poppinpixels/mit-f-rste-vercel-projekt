@@ -160,3 +160,38 @@ main {
     margin-top: 4px;
     display: none;
 }
+
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: #4CAF50;
+    z-index: 1000;
+    transition: width 0.3s;
+}
+
+.skeleton {
+    animation: pulse 1.5s infinite;
+}
+
+.skeleton-title {
+    height: 24px;
+    background: #eee;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.skeleton-text {
+    height: 12px;
+    background: #eee;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    width: 80%;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
