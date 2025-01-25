@@ -15,6 +15,8 @@
     <meta property="og:description" content="AI og uddannelse">
     <meta property="og:type" content="https://mit-f-rste-vercel-projekt.vercel.app/">
     <meta property="og:url" content="https://mit-f-rste-vercel-projekt.vercel.app/">
+    <!-- Tilføjer Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
     <header>
@@ -59,6 +61,14 @@
             <button type="submit">Send</button>
             </form>
         </section>
+            <!-- Test boks med Tailwind styling:
+                 bg-blue-500: Blå baggrund
+                 p-4: Padding på alle sider (16px)
+                 text-white: Hvid tekst
+                 rounded: Afrundede hjørner -->
+            <div class="bg-blue-500 p-4 text-white rounded">
+                Test af Tailwind CSS
+            </div>
     </main>
 
     <script>
@@ -179,22 +189,22 @@
         card.classList.add('loaded');
     }, 1500);
 });
-// Error handling utilities
-function showError(message, element) {
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'error-message';
-    errorDiv.textContent = message;
-    element.parentNode.insertBefore(errorDiv, element.nextSibling);
+    // Error handling utilities
+    function showError(message, element) {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.textContent = message;
+        element.parentNode.insertBefore(errorDiv, element.nextSibling);
     
-    setTimeout(() => errorDiv.remove(), 5000);
+        setTimeout(() => errorDiv.remove(), 5000);
 }
 
-// Form validation with error handling
-document.querySelector('.kontakt-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const button = this.querySelector('button');
+    // Form validation with error handling
+    document.querySelector('.kontakt-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const button = this.querySelector('button');
     
-    try {
+        try {
         // Validate all fields
         const inputs = this.querySelectorAll('input, textarea');
         let hasError = false;
