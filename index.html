@@ -17,16 +17,18 @@
     <meta property="og:url" content="https://mit-f-rste-vercel-projekt.vercel.app/">
     <!-- Tilføjer Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-          theme: {
-            fontFamily: {
-              'sans': ['Aptos', 'Aptos'],
-              'headers': ['Aptos', 'Aptos'],
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    'sans': ['Aptos', 'sans-serif'],
+                    'headers': ['Aptos', 'sans-serif']
+                }
             }
-          }
         }
-      </script>
+    }
+</script>
 </head>
 <body>
     <header class="bg-gray-800 text-white p-6">
