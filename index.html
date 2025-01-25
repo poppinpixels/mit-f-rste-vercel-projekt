@@ -19,18 +19,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <header>
+    <header class="bg-gray-800 text-white p-6">
         <!-- Main heading with a simple nav menu -->
-        <h1 class="animated-title">Velkommen</h1>
+        <h1 class="text-4xl mb-4 animated-title">Velkommen</h1>
         <nav>
-            <ul>
-                <li><a href="#om">Om mig</a></li>
-                <li><a href="#projekter">Projekter</a></li>
-                <li><a href="#kontakt">Kontakt</a></li>
+            <ul class="flex space-x-6">
+                <li><a href="#om" class="hover:text-blue-400 transition-colors">Om mig</a></li>
+                <li><a href="#projekter" class="hover:text-blue-400 transition-colors">Projekter</a></li>
+                <li><a href="#kontakt" class="hover:text-blue-400 transition-colors">Kontakt</a></li>
             </ul>
         </nav>
     </header>
-        <div class="weather-widget"></div>
+    <div class="weather-widget"></div>
     <main>
         <!-- "Om mig" section -->
         <section id="om">
