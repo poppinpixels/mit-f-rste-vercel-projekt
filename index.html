@@ -158,21 +158,22 @@
        progressBar.style.width = scrolled + '%';
    });
    
-   // Skeleton loading
-   document.querySelectorAll('.projekt-kort').forEach(card => {
-       card.innerHTML = `
-           <div class="skeleton">
-               <div class="skeleton-title"></div>
-               <div class="skeleton-text"></div>
-               <div class="skeleton-text"></div>
-           </div>
-       `;
-       
-       setTimeout(() => {
-           card.innerHTML = card.dataset.content;
-           card.classList.add('loaded');
-       }, 1500);
-   });
+   // Projekt kort loading
+document.querySelectorAll('.projekt-kort').forEach(card => {
+    const originalContent = card.innerHTML;
+    card.innerHTML = `
+        <div class="skeleton">
+            <div class="skeleton-title"></div>
+            <div class="skeleton-text"></div>
+            <div class="skeleton-text"></div>
+        </div>
+    `;
+    
+    setTimeout(() => {
+        card.innerHTML = originalContent;
+        card.classList.add('loaded');
+    }, 1500);
+});
 </script>
 </body>
 </html>
