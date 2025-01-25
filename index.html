@@ -52,10 +52,10 @@
         <section id="kontakt">
             <h2>Kontakt</h2>
             <form class="kontakt-form">
-                <input type="text" placeholder="Dit navn" required>
-                <input type="email" placeholder="Din email" required>
-                <textarea placeholder="Din besked" required></textarea>
-                <button type="submit">Send</button>
+                <input type="text" name="name" placeholder="Dit navn" required>
+                <input type="email" name="email" placeholder="Din email" required>
+                <textarea name="message" placeholder="Din besked" required></textarea>
+            <button type="submit">Send</button>
             </form>
         </section>
     </main>
@@ -241,6 +241,33 @@ function simulateAPICall() {
 window.addEventListener('error', function(e) {
     console.error('JavaScript fejl:', e.message);
     showError('Der skete en uventet fejl', document.body);
+});
+
+// Form storage handling
+const form = document.querySelector('.kontakt-form');
+const formFields = ['name', 'email', 'message'];
+
+// Save form data
+form.addEventListener('input', (e) => {
+    const field = e.target;
+    localStorage.setItem(`form_${field.name}`, field.value);
+});
+
+// Load saved data
+window.addEventListener('load', () => {
+    formFields.forEach(field => {
+        const value = localStorage.getItem(`form_${field}`);
+        if (value) {
+            form.elements[field].value = value;
+        }
+    });
+});
+
+// Clear storage on submit
+form.addEventListener('submit', () => {
+    formFields.forEach(field => {
+        localStorage.removeItem(`form_${field}`);
+    });
 });
 </script>
 </body>
