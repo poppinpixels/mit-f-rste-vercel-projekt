@@ -195,3 +195,17 @@ main {
     50% { opacity: 1; }
     100% { opacity: 0.6; }
 }
+
+.error-message {
+    color: #f44336;
+    background: #ffebee;
+    padding: 8px;
+    border-radius: 4px;
+    margin: 8px 0;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}

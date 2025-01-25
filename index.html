@@ -178,6 +178,70 @@
         card.classList.add('loaded');
     }, 1500);
 });
+// Error handling utilities
+function showError(message, element) {
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message';
+    errorDiv.textContent = message;
+    element.parentNode.insertBefore(errorDiv, element.nextSibling);
+    
+    setTimeout(() => errorDiv.remove(), 5000);
+}
+
+// Form validation with error handling
+document.querySelector('.kontakt-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const button = this.querySelector('button');
+    
+    try {
+        // Validate all fields
+        const inputs = this.querySelectorAll('input, textarea');
+        let hasError = false;
+        
+        inputs.forEach(input => {
+            if (!input.value.trim()) {
+                showError('Dette felt er påkrævet', input);
+                hasError = true;
+            }
+        });
+        
+        if (hasError) return;
+        
+        // Simulate API call
+        button.disabled = true;
+        button.innerHTML = '<span class="loading"></span> Sender...';
+        
+        const response = await simulateAPICall();
+        
+        if (!response.ok) {
+            throw new Error('Netværksfejl');
+        }
+        
+        button.innerHTML = 'Sendt!';
+        this.reset();
+        
+    } catch (error) {
+        showError(error.message || 'Der skete en fejl', this);
+    } finally {
+        button.disabled = false;
+        setTimeout(() => button.innerHTML = 'Send', 2000);
+    }
+});
+
+// Simulate API call
+function simulateAPICall() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve({ ok: true });
+        }, 2000);
+    });
+}
+
+// Global error handling
+window.addEventListener('error', function(e) {
+    console.error('JavaScript fejl:', e.message);
+    showError('Der skete en uventet fejl', document.body);
+});
 </script>
 </body>
 </html>
