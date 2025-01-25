@@ -31,3 +31,16 @@ nav a {
     color: white;
     text-decoration: none;
 }
+
+.projekt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.projekt-kort {
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
