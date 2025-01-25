@@ -296,6 +296,12 @@ async function getWeather() {
         console.error('Vejr fejl:', error);
     }
 }
+
+// Hent vejr data når siden loader
+getWeather();
+
+// Opdater hver 30. minut
+setInterval(getWeather, 1800000);
 </script>
 </body>
 </html>
